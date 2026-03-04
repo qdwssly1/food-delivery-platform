@@ -4,14 +4,25 @@ server:
 spring:
   application:
     name: food-delivery-backend
+
   datasource:
     url: jdbc:mysql://localhost:3306/food_delivery?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
+
+  # 关键：启动时执行 schema.sql / data.sql
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:db/schema.sql
+      data-locations: classpath:db/data.sql
+      continue-on-error: false
+
   jpa:
     hibernate:
       ddl-auto: none
+    open-in-view: false
     show-sql: true
     properties:
       hibernate:
